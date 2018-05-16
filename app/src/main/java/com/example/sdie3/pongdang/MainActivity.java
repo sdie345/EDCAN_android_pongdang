@@ -1,5 +1,8 @@
 package com.example.sdie3.pongdang;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -34,6 +37,14 @@ public class MainActivity extends AppCompatActivity {
                     String responseStr = response.body().string();
                     JSONObject json = new JSONObject(responseStr);
                     text.setText("" + json.getString("temp") + " " + json.getString("time"));
+                    NotificationCompat.Builder builder =
+                            new NotificationCompat.Builder(MainActivity.this)
+                                    .setSmallIcon(R.drawable.ic_launcher_background)
+                                    .setContentText("한강가라 ㅉㅉ")
+                                    .setContentText("asdf");
+                    NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+                    notificationManager.notify(0,builder.build());
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 } catch (JSONException e) {
